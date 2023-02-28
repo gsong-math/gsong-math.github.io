@@ -2323,7 +2323,7 @@ nav a:hover {
   border-bottom: 5px solid #c1c0bd
 }
 nav ul.inline li a {
-  font-size: 1rem
+  font-size: 1.2rem
 }
 nav ul.inline li::before {
   content: ''
