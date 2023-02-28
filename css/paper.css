@@ -685,7 +685,8 @@ h2 {
   margin-bottom: .5rem
 }
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  margin-top: 1rem;
   margin: 0.3rem;
   margin-left: 0.6rem
 }
@@ -755,10 +756,11 @@ ul {
   margin: 0.15rem
 }
 ul li::before {
-  content: "\2022"
+  content: "\2022";
 }
 ul li {
-  text-indent: -7px
+  text-indent: -7px;
+  margin-top: 0.25rem
 }
 ul li .badge,
 ul li [popover-bottom]::after,
