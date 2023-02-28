@@ -680,8 +680,9 @@ h1 {
 h2 {
   font-size: 1.5rem;
   text-decoration: underline dotted;
-  margin: 0.5rem;
+  margin-top: 1.5rem;
   margin-left: 0rem;
+  margin-bottom: .5rem
 }
 h3 {
   font-size: 1.1rem;
