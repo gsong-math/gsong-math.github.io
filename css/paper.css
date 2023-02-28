@@ -680,12 +680,13 @@ h1 {
 h2 {
   font-size: 1.5rem;
   text-decoration: underline dotted;
-  margin: 0.4rem;
+  margin: 0.5rem;
   margin-left: 0rem;
 }
 h3 {
-  font-size: 1.2rem;
-  margin: 0.2rem
+  font-size: 1.1rem;
+  margin: 0.3rem;
+  margin-left: 0.6rem
 }
 h4 {
   font-size: 1rem
@@ -2339,7 +2340,7 @@ nav .nav-brand h4,
 nav .nav-brand h5,
 nav .nav-brand h6 {
   margin: 0;
-  margin-bottom: .2rem
+  margin-bottom: .5rem
 }
 nav .collapsible input[id^=collapsible]:checked ~ div.collapsible-body {
   margin: 0;
