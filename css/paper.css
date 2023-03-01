@@ -216,7 +216,8 @@ menu {
   display: block
 }
 summary {
-  display: list-item
+  display: list-item;
+  font-weight: bolder
 }
 canvas {
   display: inline-block
