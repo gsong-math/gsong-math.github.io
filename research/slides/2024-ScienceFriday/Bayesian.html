@@ -9,82 +9,115 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
+<script>
+    function updateResult() {
+        var inputElements = document.querySelectorAll('.small-input');
+    
+        
+        var resultElements = document.querySelectorAll('.result-box');
+        var h = document.getElementById('head').value;
+        var t = document.getElementById('tail').value;
+    
+        var outputs = [];
+        var theta = [0.1, 0.3, 0.5, 0.7, 0.9]
+        var sum = 0; 
+        var inputSum = 0;
+        for (var i = 0; i < inputElements.length; i++) {
+            var x = parseFloat(inputElements[i].value);
+            var p = Math.pow(theta[i], h) * Math.pow(1-theta[i], t) * nCr(h+t, h)*x;
+            outputs.push(p);
+            sum += p;
+            inputSum += x; 
+        }
+    
+        // Check if the sum of the input values is 1
+        if (Math.abs(inputSum - 1) > 0.00001) { // Use a small tolerance to account for floating point precision
+            // throw new Error("The sum of the inputs is not 1");
+            // Alternatively, you can display a message to the user
+            alert("The sum of the inputs is not 1");
+        }        
+    
+    
+        // Display the results in the corresponding result boxes
+        outputs.forEach(function(output, index) {
+        resultElements[index].textContent = (output/sum).toFixed(2);
+        });
+        }
+    
+    function nCr(n, r) {
+        if (r < 0 || r > n) {
+        return 0;
+        }
+    
+        if (r === 0 || r === n) {
+        return 1;
+        }
+    
+        // Initialize result
+        let result = 1;
+    
+        // Use the identity C(n, r) = C(n, n-r) to optimize calculations
+        if (r > n - r) {
+        r = n - r;
+        }
+    
+        // Calculate C(n, r) using the formula C(n, r) = n! / (r! * (n-r)!)
+        for (let i = 0; i < r; i++) {
+        result *= (n - i);
+        result /= (i + 1);
+        }
+    
+        return Math.round(result); // Round to handle potential precision issues
+    }
+</script>
+
 <style>
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-}
+    body {
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        font-size: 4vw;
+        /* text-align: center; */
+    }
 
-:root {
-    --base-font-size: 3vw;
-}
-
-.container {
-    width: 90vw; /* 80% of the viewport width */
-    max-width: 800px; /* Set a maximum width if needed */
-    margin: 0 auto; /* Center the container */
-    padding: 5vh; /* 5% of the viewport height */
-}
-
-table {
-    width: 100%; /* Make the table take up the full width of its container */
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th, td {
-    border: 0;
-    padding: 8px;
-    text-align: left;
-}
-
-.first-column {
-    font-size: 3vw;
+    .first-column {
+    font-size: 5vw;
     width: 10vw; /* 10% of the viewport width */
-    max-width: 40px; /* Set a maximum width if needed */
     font-weight: bold;
-}
+    }
 
-.small-input,
-.normal-input {
-    font-size: 3vw;
-    width: 20vw; /* 20% of the viewport width */
-    max-width: 80px; /* Set a maximum width if needed */
-}
+    .small-input,
+    .normal-input {
+        font-size: 4vw;
+        width: 10vw;
+        padding: auto; /* 20% of the viewport width */
+    }
 
-.result-box {
-    width: 15vw; /* 20% of the viewport width */
-    max-width: 80px; /* Set a maximum width if needed */
+    .regular {
+    font-size: 5vw;
+    }
+
+    .small {
+    font-size: 4vw;
+    }
+
+    .result-box {
+    width: 10vw; /* 20% of the viewport width */
     border: 1px solid #ccc;
     padding: 1vw;
     text-align: center;
     background-color: #e0e0e0; /* Background color */
     color: #de0e0e; /* Font color */
-    font-size: 3vw
-}
-
-.regular {
-    font-size: 3vw;
-}
-
-
-
-h2 {
-    font-size: var(--base-font-size);
-}
-
-
-/* h2 {
-    font-size: 5vw; /* Set the font size as a percentage of the viewport width */
-    /* Add more styles as needed */
-} */
-
+    /* font-size: 3vw */
+    }
 </style>
-
 </head>
 <body>
-  <div class="container">
     <h2>Prior on \(\theta\) (the prob. of head) </h2>
     <table>
         <tr>
@@ -118,9 +151,9 @@ h2 {
     </table>
 
     <h2>Data</h2>
-        <label for="head" class="regular">Number of heads</label>&nbsp;&nbsp; <input type="number" id="head" value="0" class="normal-input">
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label for="tail" class="regular">Number of tails</label> &nbsp;&nbsp; <input type="number" id="tail" value="0" class="normal-input">
+        <label for="head" class="small">Number of heads</label>&nbsp; <input type="number" id="head" value="0" class="normal-input">
+        &nbsp;&nbsp;
+        <label for="tail" class="small">Number of tails</label> &nbsp; <input type="number" id="tail" value="0" class="normal-input">
 
     <h2>Posterior on \(\theta\) &nbsp;&nbsp;  <button onclick="updateResult()" class="regular">Generate</button> </h2>
     <table>
@@ -151,74 +184,5 @@ h2 {
             <!-- <td><div id="result10" class="result-box"></div></td> -->
         </tr>
     </table>
-  </div>
-
-  <script>
-
-
-    function updateResult() {
-        var inputElements = document.querySelectorAll('.small-input');
-
-        
-        var resultElements = document.querySelectorAll('.result-box');
-        var h = document.getElementById('head').value;
-        var t = document.getElementById('tail').value;
-
-        var outputs = [];
-        var theta = [0.1, 0.3, 0.5, 0.7, 0.9]
-        var sum = 0; 
-        var inputSum = 0;
-        for (var i = 0; i < inputElements.length; i++) {
-            var x = parseFloat(inputElements[i].value);
-            var p = Math.pow(theta[i], h) * Math.pow(1-theta[i], t) * nCr(h+t, h)*x;
-            outputs.push(p);
-            sum += p;
-            inputSum += x; 
-        }
-
-        // Check if the sum of the input values is 1
-        if (Math.abs(inputSum - 1) > 0.00001) { // Use a small tolerance to account for floating point precision
-            // throw new Error("The sum of the inputs is not 1");
-            // Alternatively, you can display a message to the user
-            alert("The sum of the inputs is not 1");
-        }        
-
-
-      // Display the results in the corresponding result boxes
-      outputs.forEach(function(output, index) {
-        resultElements[index].textContent = (output/sum).toFixed(2);
-      });
-      }
-
-    function nCr(n, r) {
-      if (r < 0 || r > n) {
-        return 0;
-      }
-
-      if (r === 0 || r === n) {
-        return 1;
-      }
-
-      // Initialize result
-      let result = 1;
-
-      // Use the identity C(n, r) = C(n, n-r) to optimize calculations
-      if (r > n - r) {
-        r = n - r;
-      }
-
-      // Calculate C(n, r) using the formula C(n, r) = n! / (r! * (n-r)!)
-      for (let i = 0; i < r; i++) {
-        result *= (n - i);
-        result /= (i + 1);
-      }
-
-      return Math.round(result); // Round to handle potential precision issues
-    }
-
-    
-
-
-  </script>
 </body>
 </html>
