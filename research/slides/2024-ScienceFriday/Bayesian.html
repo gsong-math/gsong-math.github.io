@@ -4,117 +4,155 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Display with reveal.js</title>
-  <link rel="stylesheet" href="reveal.min.css">
-  <link rel="stylesheet" href="theme/black.min.css">
 <!-- Include MathJax -->
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <style>
-    .first-column {
-      width: 40px;
-      font-weight: bold;   /* Adjust the width as needed */
-    }
-    /* Define a class for smaller input boxes */
-    .small-input {
-      width: 40px; 
-      text-align: center;/* Adjust the width as needed */
-    }
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-    .normal-input {
-      width: 50px;
-      text-align: center; /* Adjust the width as needed */
-    }
+:root {
+    --base-font-size: 3vw;
+}
 
-    /* Define a class for result boxes */
-    .result-box {
-      width: 35px;
-      height: 20px; /* Adjust the width as needed */
-      background-color: #dd9a1c; /* Example background color */
-      padding: 5px;
-      text-align: center;
-    }
+.container {
+    width: 90vw; /* 80% of the viewport width */
+    max-width: 800px; /* Set a maximum width if needed */
+    margin: 0 auto; /* Center the container */
+    padding: 5vh; /* 5% of the viewport height */
+}
+
+table {
+    width: 100%; /* Make the table take up the full width of its container */
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 0;
+    padding: 8px;
+    text-align: left;
+}
+
+.first-column {
+    font-size: 3vw;
+    width: 10vw; /* 10% of the viewport width */
+    max-width: 40px; /* Set a maximum width if needed */
+    font-weight: bold;
+}
+
+.small-input,
+.normal-input {
+    font-size: 3vw;
+    width: 20vw; /* 20% of the viewport width */
+    max-width: 80px; /* Set a maximum width if needed */
+}
+
+.result-box {
+    width: 15vw; /* 20% of the viewport width */
+    max-width: 80px; /* Set a maximum width if needed */
+    border: 1px solid #ccc;
+    padding: 1vw;
+    text-align: center;
+    background-color: #e0e0e0; /* Background color */
+    color: #de0e0e; /* Font color */
+    font-size: 3vw
+}
+
+.regular {
+    font-size: 3vw;
+}
+
+
+
+h2 {
+    font-size: var(--base-font-size);
+}
+
+
+/* h2 {
+    font-size: 5vw; /* Set the font size as a percentage of the viewport width */
+    /* Add more styles as needed */
+} */
+
 </style>
 
 </head>
 <body>
-  <div class="reveal">
-    <div class="slides">
-      <!-- Slide 1: Input box and Button -->
-      <section>
-        <h2>Prior on \(\theta\) (the prob. of head) </h2>
-        <table>
-            <tr>
-              <!-- Input boxes in the second row -->
-                <td class="first-column">\(\theta\)</td>
-                <td><label for="input1">0.1</label></td>
-                <!-- <td><label for="input2">0.2</label></td> -->
-                <td><label for="input3">0.3</label></td>
-                <!-- <td><label for="input4">0.4</label></td> -->
-                <td><label for="input5">0.5</label></td>
-                <!-- <td><label for="input6">0.6</label></td> -->
-                <td><label for="input7">0.7</label></td>
-                <!-- <td><label for="input8">0.8</label></td> -->
-                <td><label for="input9">0.9</label></td>
-                <!-- <td><label for="input10">1.0</label></td>              -->
-            </tr>
-            <tr>
-              <!-- Input boxes in the second row -->
-                <td class="first-column">Pr</td>
-                <td><input type="number" id="input1" value="0.0" step="0.1" class="small-input"></td>
-                <!-- <td><input type="number" id="input2" value="0.0" step="0.1" class="small-input"></td> -->
-                <td><input type="number" id="input3" value="0.0" step="0.1" class="small-input"></td>
-                <!-- <td><input type="number" id="input4" value="0.0" step="0.1" class="small-input"></td> -->
-                <td><input type="number" id="input5" value="0.0" step="0.1" class="small-input"></td>
-                <!-- <td><input type="number" id="input6" value="0.0" step="0.1" class="small-input"></td> -->
-                <td><input type="number" id="input7" value="0.0" step="0.1" class="small-input"></td>
-                <!-- <td><input type="number" id="input8" value="0.0" step="0.1" class="small-input"></td> -->
-                <td><input type="number" id="input9" value="0.0" step="0.1" class="small-input"></td>
-                <!-- <td><input type="number" id="input10" value="0.0" step="0.1" class="small-input"></td> -->
-            </tr>   
-          </table>
+  <div class="container">
+    <h2>Prior on \(\theta\) (the prob. of head) </h2>
+    <table>
+        <tr>
+          <!-- Input boxes in the second row -->
+            <td class="first-column">\(\theta\)</td>
+            <td><label for="input1" class="regular">0.1</label></td>
+            <!-- <td><label for="input2">0.2</label></td> -->
+            <td><label for="input3" class="regular">0.3</label></td>
+            <!-- <td><label for="input4">0.4</label></td> -->
+            <td><label for="input5" class="regular">0.5</label></td>
+            <!-- <td><label for="input6">0.6</label></td> -->
+            <td><label for="input7" class="regular">0.7</label></td>
+            <!-- <td><label for="input8">0.8</label></td> -->
+            <td><label for="input9" class="regular">0.9</label></td>
+            <!-- <td><label for="input10">1.0</label></td>              -->
+        </tr>
+        <tr>
+          <!-- Input boxes in the second row -->
+            <td class="first-column">Pr</td>
+            <td><input type="number" id="input1" value="0.0" step="0.1" class="small-input"></td>
+            <!-- <td><input type="number" id="input2" value="0.0" step="0.1" class="small-input"></td> -->
+            <td><input type="number" id="input3" value="0.0" step="0.1" class="small-input"></td>
+            <!-- <td><input type="number" id="input4" value="0.0" step="0.1" class="small-input"></td> -->
+            <td><input type="number" id="input5" value="0.0" step="0.1" class="small-input"></td>
+            <!-- <td><input type="number" id="input6" value="0.0" step="0.1" class="small-input"></td> -->
+            <td><input type="number" id="input7" value="0.0" step="0.1" class="small-input"></td>
+            <!-- <td><input type="number" id="input8" value="0.0" step="0.1" class="small-input"></td> -->
+            <td><input type="number" id="input9" value="0.0" step="0.1" class="small-input"></td>
+            <!-- <td><input type="number" id="input10" value="0.0" step="0.1" class="small-input"></td> -->
+        </tr>   
+    </table>
 
-        <h2>Data</h2>
-            <label for="head">Number of heads</label> <input type="number" id="head" value="0" class="normal-input">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <label for="tail">Number of tails</label> <input type="number" id="tail" value="0" class="normal-input">
+    <h2>Data</h2>
+        <label for="head" class="regular">Number of heads</label>&nbsp;&nbsp; <input type="number" id="head" value="0" class="normal-input">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label for="tail" class="regular">Number of tails</label> &nbsp;&nbsp; <input type="number" id="tail" value="0" class="normal-input">
 
-        <h2>Posterior on \(\theta\) &nbsp;&nbsp;  <button onclick="updateResult()">Generate</button> </h2>
-        <table>
-            <tr>
-                <td class="first-column">\(\theta\)</td>
-                <td>0.1</td>
-                <!-- <td>0.2</td> -->
-                <td>0.3</td>
-                <!-- <td>0.4</td> -->
-                <td>0.5</td>
-                <!-- <td>0.6</td> -->
-                <td>0.7</td>
-                <!-- <td>0.8</td> -->
-                <td>0.9</td>
-                <!-- <td>1.0</td> -->
-            </tr>
-            <tr>
-                <td class="first-column">Pr</td>
-                <td><div id="result1" class="result-box"></div></td>
-                <!-- <td><div id="result2" class="result-box"></div></td> -->
-                <td><div id="result3" class="result-box"></div></td>
-                <!-- <td><div id="result4" class="result-box"></div></td> -->
-                <td><div id="result5" class="result-box"></div></td>
-                <!-- <td><div id="result6" class="result-box"></div></td> -->
-                <td><div id="result7" class="result-box"></div></td>
-                <!-- <td><div id="result8" class="result-box"></div></td> -->
-                <td><div id="result9" class="result-box"></div></td>
-                <!-- <td><div id="result10" class="result-box"></div></td> -->
-            </tr>
-        </table>
-      </section>
-
-    </div>
+    <h2>Posterior on \(\theta\) &nbsp;&nbsp;  <button onclick="updateResult()" class="regular">Generate</button> </h2>
+    <table>
+        <tr>
+            <td class="first-column">\(\theta\)</td>
+            <td class="regular">0.1</td>
+            <!-- <td>0.2</td> -->
+            <td class="regular">0.3</td>
+            <!-- <td>0.4</td> -->
+            <td class="regular">0.5</td>
+            <!-- <td>0.6</td> -->
+            <td class="regular">0.7</td>
+            <!-- <td>0.8</td> -->
+            <td class="regular">0.9</td>
+            <!-- <td>1.0</td> -->
+        </tr>
+        <tr>
+            <td class="first-column">Pr</td>
+            <td><div id="result1" class="result-box"></div></td>
+            <!-- <td><div id="result2" class="result-box"></div></td> -->
+            <td><div id="result3" class="result-box"></div></td>
+            <!-- <td><div id="result4" class="result-box"></div></td> -->
+            <td><div id="result5" class="result-box"></div></td>
+            <!-- <td><div id="result6" class="result-box"></div></td> -->
+            <td><div id="result7" class="result-box"></div></td>
+            <!-- <td><div id="result8" class="result-box"></div></td> -->
+            <td><div id="result9" class="result-box"></div></td>
+            <!-- <td><div id="result10" class="result-box"></div></td> -->
+        </tr>
+    </table>
   </div>
 
-  <script src="reveal.js"></script>
   <script>
 
 
